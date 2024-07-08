@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { useState } from "react"; 
 
-export default function Form() { 
+function Form() { 
 	const [name, setName] = useState(""); 
 	const [email, setEmail] = useState(""); 
 	const [password, setPassword] = useState(""); 
@@ -32,13 +32,14 @@ export default function Form() {
     	if (this.state.password !== this.state.passwordVerif){
       		return this.setAlertMessage("Passwords must match!");
     	} else {
+			setPasswordVerif(e.target.value);
       		setSubmitted(false);
     	}
     }
 
 	const handleSubmit = (e) => { 
 		e.preventDefault(); 
-		if (name === "" || email === "" || password === "") { 
+		if (name === "" || email === "" || password === "" || passwordVerif === "") { 
 			setError(true); 
 		} else { 
 			setSubmitted(true); 
@@ -49,7 +50,6 @@ export default function Form() {
 	const successMessage = () => { 
 		return ( 
 			<div 
-				className="success"
 				style={{ 
 					display: submitted ? "" : "none", 
 				}} 
@@ -75,9 +75,6 @@ export default function Form() {
 	{}
 	return ( 
 		<div className='content-center w-50% h-100%'> 
-			<div> 
-				<h1 className='font-semibold text-6xl pt-50px pl-30px'>Sign up</h1> 
-			</div> 
       
 			<div className="flex-auto content-center"> 
 				{errorMessage()} 
@@ -88,7 +85,6 @@ export default function Form() {
 				{}
 				<input 
 					onChange={handleName} 
-					className="input"
 					value={name} 
 					type="text"
 					placeholder="your name"
@@ -96,7 +92,6 @@ export default function Form() {
 
 				<input 
 					onChange={handleEmail} 
-					className="input"
 					value={email} 
 					type="email"
 					placeholder="Your email"
@@ -104,7 +99,6 @@ export default function Form() {
 
 				<input 
 					onChange={handlePassword} 
-					className="input"
 					value={password} 
 					type="password"
 					placeholder="Password"
@@ -112,13 +106,12 @@ export default function Form() {
 
 				<input 
 					onChange={verifyPassword} 
-					className="input"
-					value={password} 
+					value={passwordVerif} 
 					type="password"
-					placeholder="Password"
+					placeholder="Repeat password"
 				/>
 
-				<button onClick={handleSubmit} className="btn" type="submit"> 
+				<button onClick={handleSubmit} type="submit"> 
 					Register 
 				</button> 
 			</form> 
@@ -126,3 +119,4 @@ export default function Form() {
 	); 
 } 
 
+export default Form;
